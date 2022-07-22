@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
             InputX = 0;
             InputZ = 0;
             ExitArcade();
+            ConfirmGame();
         }
         PlayerMovement();
     }
@@ -48,19 +49,34 @@ public class PlayerController : MonoBehaviour
 
     void Interact()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && onArcadeRange)
         {
             cameraOnPlayer = false;
             arcadeManager.FocusCamera();
         }
     }
+
+    void ConfirmGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            arcadeManager.OpenGame();
+        }
+    }
+
     void ExitArcade()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Backspace))
         {
-            arcadeManager.ExitFocus();
-            cameraOnPlayer = true;
+            ExitButton();
         }
+    }
+
+    public void ExitButton()
+    {
+        Debug.Log("Exit Button");
+        arcadeManager.ExitFocus();
+        cameraOnPlayer = true;
     }
 
     void OnTriggerEnter(Collider other)

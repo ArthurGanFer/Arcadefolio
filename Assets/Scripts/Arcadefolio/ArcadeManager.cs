@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ArcadeManager : MonoBehaviour
 {
     private CameraController cameraController;
     public Transform focusPoint;
+    public TextMeshProUGUI confirmText;
+    public GameObject exitArcadeButton;
 
     public enum ArcadeGame
     {
@@ -32,16 +35,30 @@ public class ArcadeManager : MonoBehaviour
     public void FocusCamera()
     {
         cameraController.ChangeCameraPos(focusPoint);
+        StartCoroutine(ShowConfirmScreen());
     }
 
     public void ExitFocus()
     {
         cameraController.AttachToPlayer();
+        exitArcadeButton.SetActive(false);
+        confirmText.gameObject.SetActive(false);
     }
 
     public void OpenGame()
     {
-        //SceneManager.LoadScene(arcadeGame.ToString());
+        SceneManager.LoadScene(arcadeGame.ToString());
+    }
+
+    IEnumerator ShowConfirmScreen()
+    {
+        yield return new WaitForSeconds(2);
+        if (!cameraController.attachedToPlayer)
+        {
+            exitArcadeButton.SetActive(true);
+            confirmText.text = "Press Enter to play " + arcadeGame;
+            confirmText.gameObject.SetActive(true);
+        }
     }
 
 }

@@ -16,6 +16,7 @@ public class DogFeedingManager : MonoBehaviour
     public TextMeshProUGUI gameOver;
     public TextMeshProUGUI scoreText;
     private int difficulty = 0;//0 = easy; 1 = medium; 2 = hard
+    public GameObject exitButton;
 
     public AudioSource gameAudio;
     public AudioClip btnHover;
@@ -30,6 +31,7 @@ public class DogFeedingManager : MonoBehaviour
     {
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         UpdateLifeUI();
+        exitButton = GameObject.Find("ExitButton");
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class DogFeedingManager : MonoBehaviour
         SetGameStatus(true);
         StartCoroutine(SpawnTargets());
         gameTitle.gameObject.SetActive(false);
+        exitButton.SetActive(false);
         backgroundMusic.Play(0);
     }
 
@@ -105,6 +108,11 @@ public class DogFeedingManager : MonoBehaviour
     public bool GetGameActive()
     {
         return isGameActive;
+    }
+
+    public void ExitToArcade()
+    {
+        SceneManager.LoadScene("Arcade");
     }
 
 }
