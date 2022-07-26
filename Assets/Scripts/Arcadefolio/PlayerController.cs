@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             cameraOnPlayer = false;
             arcadeManager.FocusCamera();
+            arcadeManager.tooltip.SetActive(false);
         }
     }
 
@@ -74,17 +75,20 @@ public class PlayerController : MonoBehaviour
 
     public void ExitButton()
     {
-        Debug.Log("Exit Button");
         arcadeManager.ExitFocus();
         cameraOnPlayer = true;
+        arcadeManager.tooltip.SetActive(true);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<ArcadeManager>() != null)
+        if (other.gameObject.GetComponent<ArcadeManager>() != null && !onArcadeRange)
         {
             arcadeManager = other.gameObject.GetComponent<ArcadeManager>();
             onArcadeRange = true;
+            arcadeManager.arcadeOn.SetActive(true);
+            arcadeManager.tooltip.SetActive(true);
+            arcadeManager.mainAudio.PlayOneShot(arcadeManager.interactionSound);
         }
     }
 
@@ -92,6 +96,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.GetComponent<ArcadeManager>() != null)
         {
+            other.gameObject.GetComponent<ArcadeManager>().arcadeOn.SetActive(false);
+            other.gameObject.GetComponent<ArcadeManager>().tooltip.SetActive(false);
             onArcadeRange = false;
             arcadeManager = null;
         }

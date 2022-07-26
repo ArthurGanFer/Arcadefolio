@@ -10,6 +10,10 @@ public class ArcadeManager : MonoBehaviour
     public Transform focusPoint;
     public TextMeshProUGUI confirmText;
     public GameObject exitArcadeButton;
+    public GameObject arcadeOn;
+    public GameObject tooltip;
+    public AudioClip interactionSound;
+    public AudioSource mainAudio;
 
     public enum ArcadeGame
     {
@@ -24,6 +28,7 @@ public class ArcadeManager : MonoBehaviour
     void Start()
     {
         cameraController = GameObject.Find("Main Camera").GetComponent<CameraController>();
+        mainAudio = GameObject.Find("Main Camera").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

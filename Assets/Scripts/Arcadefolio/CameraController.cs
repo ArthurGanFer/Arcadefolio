@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
         } else
         {
             transform.position = Vector3.MoveTowards(transform.position, cameraPos.position, cameraSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, cameraPos.rotation, cameraSpeed * Time.deltaTime * 3);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, cameraPos.rotation, cameraSpeed * Time.deltaTime * 5);
         }
     }
 
