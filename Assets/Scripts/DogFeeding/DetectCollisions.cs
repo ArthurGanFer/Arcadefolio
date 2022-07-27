@@ -19,7 +19,7 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Bone"))
+        if (other.gameObject.CompareTag("Bone") && gameManager.GetGameActive())
         {
             gameManager.AddScore(1);
             gameManager.AddLife(1);

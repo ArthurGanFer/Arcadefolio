@@ -33,16 +33,13 @@ public class DogFeedingPlayerController : MonoBehaviour
         }
 
         //Player move
-        if (gameManager.GetGameActive())
-        {
-            horizontalInput = Input.GetAxis("Horizontal");
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
-            //Firing projectile prefab
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Instantiate(projectilePrefab, transform.position, transform.rotation);
-            }
+        //Firing projectile prefab
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectilePrefab, transform.position, transform.rotation);
         }
 
     }

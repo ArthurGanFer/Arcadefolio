@@ -29,10 +29,5 @@ public class DestroyOutOfBounds : MonoBehaviour
             gameManager.AddLife(-3);
             gameManager.gameAudio.PlayOneShot(gameManager.lifeLoss);
         }
-
-        if (!gameManager.GetGameActive())
-        {
-            Destroy(gameObject);
-        }
     }
 }
